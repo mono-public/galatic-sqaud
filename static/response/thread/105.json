@@ -1,0 +1,22 @@
+{
+  "owner": {
+    "id": "105",
+    "name": "Oakland Vaders"
+  },
+  "messages": [
+    {
+      "author": {
+        "id": "12",
+        "name": "TD-787"
+      },
+      "message": "Look, sir. Droids!"
+    },
+    {
+      "author": {
+        "id": "4",
+        "name": "Darth Vader"
+      },
+      "message": "Be careful not to choke on your aspirations."
+    }
+  ]
+}
