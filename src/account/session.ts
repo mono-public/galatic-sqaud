@@ -1,8 +1,8 @@
-import { observable } from '@microsoft/fast-element';
-import { DI } from '@microsoft/fast-foundation';
-import { Route } from '@microsoft/fast-router';
-import { Http } from '../kernel/http';
-import { User } from './user';
+import { observable } from "@microsoft/fast-element";
+import { DI } from "@microsoft/fast-foundation";
+import { Route } from "@mono-public/fast-router";
+import { Http } from "../kernel/http";
+import { User } from "./user";
 
 export interface Session {
   readonly isWorking: boolean;
@@ -19,10 +19,10 @@ export interface Session {
 export type LoginRequest = {
   username: string;
   password: string;
-}
+};
 
 class SessionImpl implements Session {
-  private returnUrl: string = '';
+  private returnUrl: string = "";
   @observable public currentUser: any = null;
   @observable public isWorking = false;
 
@@ -31,11 +31,11 @@ class SessionImpl implements Session {
   public get isLoggedIn(): boolean {
     return this.currentUser !== null;
   }
-  
+
   public async login(request: LoginRequest): Promise<User> {
     try {
       this.isWorking = true;
-      this.currentUser = await this.http.post<User>('account/login', request);
+      this.currentUser = await this.http.post<User>("account/login", request);
       return this.currentUser;
     } finally {
       this.isWorking = false;
@@ -51,10 +51,10 @@ class SessionImpl implements Session {
   }
 
   public navigateToLoginDestination(): void {
-    Route.path.push(this.returnUrl || 'home');
+    Route.path.push(this.returnUrl || "home");
   }
 }
 
-export const Session = DI.createInterface<Session>(
-  x => x.singleton(SessionImpl)
+export const Session = DI.createInterface<Session>((x) =>
+  x.singleton(SessionImpl)
 );

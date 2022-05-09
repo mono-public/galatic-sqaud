@@ -1,9 +1,21 @@
-import { customElement, html, css, when, observable, FASTElement } from '@microsoft/fast-element';
-import { Session } from './session';
-import { sync } from '../kernel/sync';
-import { mixin_cardTitle, styles_headers } from '../typography';
-import { mixin_boxShadow, mixin_cardStyles, mixin_screen, styles_cardHeading } from '../styles';
-import { DesignPropertyPanel } from './design-property-panel';
+import {
+  customElement,
+  html,
+  css,
+  when,
+  observable,
+  FASTElement,
+} from "@microsoft/fast-element";
+import { Session } from "./session";
+import { sync } from "../kernel/sync";
+import { mixin_cardTitle, styles_headers } from "../typography";
+import {
+  mixin_boxShadow,
+  mixin_cardStyles,
+  mixin_screen,
+  styles_cardHeading,
+} from "../styles";
+import { DesignPropertyPanel } from "./design-property-panel";
 
 DesignPropertyPanel;
 
@@ -12,33 +24,63 @@ const template = html<AccountSettings>`
     <h1>Settings</h1>
     <aside class="profile-card">
       <header>
-        <img src='static/image/avatar/${x => x.session.currentUser.id}.jpg'}>
-        <h1>${x => x.session.currentUser.name}</h1>
-        <h2>Member since ${x => x.session.currentUser.joinedOn}</h2>
+        <img
+          src="http://localhost:9002/static/image/avatar/${(x) =>
+            x.session.currentUser.id}.jpg"
+          }
+        />
+        <h1>${(x) => x.session.currentUser.name}</h1>
+        <h2>Member since ${(x) => x.session.currentUser.joinedOn}</h2>
       </header>
     </aside>
 
-    <fluent-card @submit=${x => x.changePassword()}>
+    <fluent-card @submit=${(x) => x.changePassword()}>
       <h2 class="heading">Change Password</h2>
       <form>
-        <fluent-text-field type="password" :value=${sync(x => x.oldPassword)}>Old Password</fluent-text-field>
-        <fluent-text-field type="password" :value=${sync(x => x.newPassword)}>New Password</fluent-text-field>
-        <fluent-text-field type="password" :value=${sync(x => x.passwordConfirm)}>Confirm Password</fluent-text-field>
-        <fluent-button appearance="accent" type="submit" ?disabled=${x => x.session.isWorking}>Update</fluent-button>
-        ${when(x => !!x.changePasswordMessage, html<AccountSettings>`
-          <div class="message">${x => x.changePasswordMessage}</div>
-        `)}
+        <fluent-text-field type="password" :value=${sync((x) => x.oldPassword)}
+          >Old Password</fluent-text-field
+        >
+        <fluent-text-field type="password" :value=${sync((x) => x.newPassword)}
+          >New Password</fluent-text-field
+        >
+        <fluent-text-field
+          type="password"
+          :value=${sync((x) => x.passwordConfirm)}
+          >Confirm Password</fluent-text-field
+        >
+        <fluent-button
+          appearance="accent"
+          type="submit"
+          ?disabled=${(x) => x.session.isWorking}
+          >Update</fluent-button
+        >
+        ${when(
+          (x) => !!x.changePasswordMessage,
+          html<AccountSettings>`
+            <div class="message">${(x) => x.changePasswordMessage}</div>
+          `
+        )}
       </form>
     </fluent-card>
 
-    <fluent-card @submit=${x => x.changeEmail()}>
+    <fluent-card @submit=${(x) => x.changeEmail()}>
       <h2 class="heading">Change Email</h2>
       <form>
-        <fluent-text-field type="password" :value=${sync(x => x.email)}>New Email</fluent-text-field>
-        <fluent-button appearance="accent" type="submit" ?disabled=${x => x.session.isWorking}>Update</fluent-button>
-        ${when(x => !!x.changeEmailMessage, html<AccountSettings>`
-          <div class="message">${x => x.changeEmailMessage}</div>
-        `)}
+        <fluent-text-field type="password" :value=${sync((x) => x.email)}
+          >New Email</fluent-text-field
+        >
+        <fluent-button
+          appearance="accent"
+          type="submit"
+          ?disabled=${(x) => x.session.isWorking}
+          >Update</fluent-button
+        >
+        ${when(
+          (x) => !!x.changeEmailMessage,
+          html<AccountSettings>`
+            <div class="message">${(x) => x.changeEmailMessage}</div>
+          `
+        )}
       </form>
     </fluent-card>
 
@@ -48,7 +90,7 @@ const template = html<AccountSettings>`
 
 const styles = css`
   :host {
-    ${mixin_screen('flex')}
+    ${mixin_screen("flex")}
     align-items: flex-start;
     justify-content: flex-start;
   }
@@ -137,26 +179,22 @@ const styles = css`
 `;
 
 @customElement({
-  name: 'account-settings',
+  name: "account-settings",
   template,
-  styles
+  styles,
 })
 export class AccountSettings extends FASTElement {
   @Session session!: Session;
 
-  @observable oldPassword = '';
-  @observable newPassword = '';
-  @observable passwordConfirm = '';
-  @observable changePasswordMessage = '';
+  @observable oldPassword = "";
+  @observable newPassword = "";
+  @observable passwordConfirm = "";
+  @observable changePasswordMessage = "";
 
-  @observable email = '';
-  @observable changeEmailMessage = '';
+  @observable email = "";
+  @observable changeEmailMessage = "";
 
-  changePassword() {
+  changePassword() {}
 
-  }
-
-  changeEmail() {
-    
-  }
+  changeEmail() {}
 }

@@ -1,7 +1,7 @@
 import { css, html } from "@microsoft/fast-element";
-import { FASTElementLayout } from "@microsoft/fast-router";
+import { FASTElementLayout } from "@mono-public/fast-router";
 import { ActivityBar } from "./activity-bar";
-import { TitleBar } from './title-bar';
+import { TitleBar } from "./title-bar";
 
 TitleBar;
 ActivityBar;
@@ -15,7 +15,7 @@ export const pageLayout = new FASTElementLayout(
         <slot></slot>
       </div>
     </div>
-  `,
+  ` as any,
   css`
     :host {
       --title-bar-height: 48px;
@@ -52,5 +52,5 @@ export const pageLayout = new FASTElementLayout(
       left: calc(var(--activity-bar-width) + 1px);
       right: 0;
     }
-  `
+  ` as any
 );

@@ -10,7 +10,7 @@ const template = html<ChatThread>`
   <div class="container">
     <header>
       ${when((x, c) => !!x.thread, html`
-        <img class="avatar" src='static/image/avatar/${x => x.thread?.owner.id}.jpg'>
+        <img class="avatar" src='http://localhost:9002/static/image/avatar/${x => x.thread?.owner.id}.jpg'>
         <h2 class="heading">${x => x.thread?.owner.name}</h2>
       `)} 
       <fluent-tabs>
@@ -22,7 +22,7 @@ const template = html<ChatThread>`
       ${repeat(x => x.thread?.messages, html<Message, ChatThread>`
         <div class="message-container ${(x, c) => c.parent.messageAuthoredByUser(x) ? 'is-author' : 'not-author'}">
           ${when((x, c) => !c.parent.messageAuthoredByUser(x), html`
-            <img class="avatar" src='static/image/avatar/${x => x.author.id}.jpg'>
+            <img class="avatar" src='http://localhost:9002/static/image/avatar/${x => x.author.id}.jpg'>
           `)} 
           <div class="content">
             <div class="author">${x => x.author.name}</div>

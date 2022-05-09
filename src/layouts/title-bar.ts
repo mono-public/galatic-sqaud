@@ -1,6 +1,15 @@
 import { accentFillRestBehavior } from "@fluentui/web-components";
-import { css, customElement, DOM, FASTElement, html, observable, ref, when } from "@microsoft/fast-element";
-import { Route } from "@microsoft/fast-router";
+import {
+  css,
+  customElement,
+  DOM,
+  FASTElement,
+  html,
+  observable,
+  ref,
+  when,
+} from "@microsoft/fast-element";
+import { Route } from "@mono-public/fast-router";
 import { Session } from "../account/session";
 
 const template = html<TitleBar>`
@@ -8,33 +17,55 @@ const template = html<TitleBar>`
     <div class="toolbar">
       <fluent-text-field placeholder="Search"></fluent-text-field>
     </div>
-    <fluent-button appearance="stealth" ${ref('avatar')} @click=${x => x.toggleMenu()}>
-      <img class="avatar" src='static/image/avatar/${x => x.session.currentUser.id}.jpg'>
+    <fluent-button
+      appearance="stealth"
+      ${ref("avatar")}
+      @click=${(x) => x.toggleMenu()}
+    >
+      <img
+        class="avatar"
+        src="http://localhost:9002/static/image/avatar/${(x) =>
+          x.session.currentUser.id}.jpg"
+      />
     </fluent-button>
-    ${when(x => x.menuIsVisible, html<TitleBar>`
-      <fluent-anchored-region
-          :anchorElement="${x => x.avatar}"
+    ${when(
+      (x) => x.menuIsVisible,
+      html<TitleBar>`
+        <fluent-anchored-region
+          :anchorElement="${(x) => x.avatar}"
           vertical-positioning-mode="dynamic"
-          horizontal-positioning-mode="dynamic">
-        <fluent-menu>
-          <div class="user-summary">
-            <img class="avatar" src='static/image/avatar/${x => x.session.currentUser.id}.jpg'>
-            <div class="user-info">
-              <div class="name">${x => x.session.currentUser.name}</div>
-              <div class="email">${x => x.session.currentUser.email}</div>
-              <div class="email">Available</div>
+          horizontal-positioning-mode="dynamic"
+        >
+          <fluent-menu>
+            <div class="user-summary">
+              <img
+                class="avatar"
+                src="http://localhost:9002/static/image/avatar/${(x) =>
+                  x.session.currentUser.id}.jpg"
+              />
+              <div class="user-info">
+                <div class="name">${(x) => x.session.currentUser.name}</div>
+                <div class="email">${(x) => x.session.currentUser.email}</div>
+                <div class="email">Available</div>
+              </div>
             </div>
-          </div>
-          <fluent-divider></fluent-divider>
-          <fluent-menu-item @click=${x => Route.name.push(x, 'settings')}>
-            <img slot="start" class="icon" src="static/image/icon/settings.webp">
-            Settings
-          </fluent-menu-item>
-          <fluent-divider></fluent-divider>
-          <fluent-menu-item @click=${x => x.logout()}>Sign out</fluent-menu-item>
-        </fluent-menu>
-      </fluent-anchored-region>
-    `)}
+            <fluent-divider></fluent-divider>
+            <fluent-menu-item @click=${(x) => Route.name.push(x, "settings")}>
+              <img
+                slot="start"
+                class="icon"
+                src="http://localhost:9002/static/image/icon/settings.webp"
+              />
+              Settings
+            </fluent-menu-item>
+            <fluent-divider></fluent-divider>
+            <fluent-menu-item @click=${(x) => x.logout()}
+              >Sign out</fluent-menu-item
+            >
+          </fluent-menu>
+        </fluent-anchored-region>
+      `
+    )}
   </div>
 `;
 
@@ -113,14 +144,12 @@ const styles = css`
   .email {
     font-size: 11px;
   }
-`.withBehaviors(
-  accentFillRestBehavior
-);
+`.withBehaviors(accentFillRestBehavior);
 
 @customElement({
-  name: 'title-bar',
+  name: "title-bar",
   template,
-  styles
+  styles,
 })
 export class TitleBar extends FASTElement {
   @Session session!: Session;
@@ -129,24 +158,24 @@ export class TitleBar extends FASTElement {
 
   async toggleMenu() {
     if (this.menuIsVisible) {
-      document.removeEventListener('click', this.handleMenuDismiss);
+      document.removeEventListener("click", this.handleMenuDismiss);
     }
 
     this.menuIsVisible = !this.menuIsVisible;
 
     if (this.menuIsVisible) {
       await DOM.nextUpdate();
-      document.addEventListener('click', this.handleMenuDismiss);
+      document.addEventListener("click", this.handleMenuDismiss);
     }
   }
 
   handleMenuDismiss = () => {
-    this.menuIsVisible = false;;
-    document.removeEventListener('click', this.handleMenuDismiss);
+    this.menuIsVisible = false;
+    document.removeEventListener("click", this.handleMenuDismiss);
   };
 
   logout() {
     this.session.logout();
-    Route.name.push(this, 'login');
+    Route.name.push(this, "login");
   }
 }
