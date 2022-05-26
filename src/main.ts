@@ -69,5 +69,3 @@ export class GalacticSquads extends FASTElement {
     this.provider.baseLayerLuminance = 1;
   }
 }
-
-//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
