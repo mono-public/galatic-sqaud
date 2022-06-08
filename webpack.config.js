@@ -238,11 +238,10 @@ module.exports = (env, argv) => {
         },
         shared: {
           "@mono-public/fast-router": {
-            requiredVersion: "0.0.0-beta.0",
+            requiredVersion: "0.0.0-beta.1",
             singleton: true,
             eager: true,
           },
-
           "@fluentui/web-components": {
             requiredVersion: "^0.16.0",
             singleton: true,

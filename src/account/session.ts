@@ -23,7 +23,7 @@ export type LoginRequest = {
 
 class SessionImpl implements Session {
   private returnUrl: string = "";
-  @observable public currentUser: any = null;
+  @observable public currentUser: any = "";
   @observable public isWorking = false;
 
   constructor(@Http private http: Http) {}

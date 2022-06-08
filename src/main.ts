@@ -44,6 +44,56 @@ export class GalacticSquads extends FASTElement {
   @inject(MainRouterConfig) config!: MainRouterConfig;
   @Container container!: Container;
   @observable provider!: any;
+  @observable public monoProps: any;
+
+  monoPropsChanged(oldValue: any, newValue: any) {
+    console.log("CUSTOM PROPS", this.monoProps);
+
+    this.monoProps.setSubHeaderMenu([
+      {
+        id: "ships",
+        layouts: [
+          {
+            h: "100%",
+            w: 24,
+            x: 0,
+            y: 0,
+          },
+        ],
+        widgets: [
+          {
+            appId: "galatic",
+            widgetId: "squad",
+            customElement: "galactic-squads",
+            route: "ships",
+          },
+        ],
+        accessScope: "public",
+        displayLabel: "Ship",
+      },
+      {
+        id: "vehicles",
+        layouts: [
+          {
+            h: "100%",
+            w: 24,
+            x: 0,
+            y: 0,
+          },
+        ],
+        widgets: [
+          {
+            appId: "galatic",
+            widgetId: "squad",
+            customElement: "galactic-squads",
+            route: "vehicles",
+          },
+        ],
+        accessScope: "public",
+        displayLabel: "vehicles",
+      },
+    ]);
+  }
 
   connectedCallback() {
     this.container.register(
@@ -51,7 +101,6 @@ export class GalacticSquads extends FASTElement {
     );
 
     super.connectedCallback();
-    console.log("CUSTOM PROPS", this["monoProps"]);
   }
 
   providerChanged() {
