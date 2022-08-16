@@ -52,7 +52,7 @@ export class GalacticSquads extends FASTElement {
     this.monoProps.setCleanUp(() =>  new Promise((res, rej) => {
       //cleanUp code for App
       console.log("cleanUp code for Galatic");
-      setTimeout( res ,2000);    
+      setTimeout( res ,500);    
     }));
 
     this.monoProps.setSubHeaderMenu([
