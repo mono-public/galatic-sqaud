@@ -49,6 +49,12 @@ export class GalacticSquads extends FASTElement {
   monoPropsChanged(oldValue: any, newValue: any) {
     console.log("CUSTOM PROPS", this.monoProps);
 
+    this.monoProps.setCleanUp(() =>  new Promise((res, rej) => {
+      //cleanUp code for App
+      console.log("cleanUp code for Galatic");
+      setTimeout( res ,2000);    
+    }));
+
     this.monoProps.setSubHeaderMenu([
       {
         id: "ships",
